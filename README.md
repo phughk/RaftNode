@@ -11,4 +11,4 @@ A basic, UDP/IP raft consensus algorithm.
 
 ## Licence
 
-MIT Licence, see LICENCE.txt
+MIT License, see LICENSE.txt
