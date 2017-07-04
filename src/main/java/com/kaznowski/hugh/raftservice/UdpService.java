@@ -14,6 +14,9 @@ import java.util.stream.Stream;
 @Slf4j
 public class UdpService {
 
+    private static final int BUFF_SIZE = 1024;
+    private static final int PORT = 9123;
+
     private final DatagramSocket datagramSocket;
     private final SocketAddress socketAddress;
 
@@ -26,7 +29,7 @@ public class UdpService {
     @SneakyThrows
     public UdpService(InetAddress bindAddress) {
         log.info("Constructing service with address {}", bindAddress.getHostAddress());
-        socketAddress = new InetSocketAddress(bindAddress, 9123);
+        socketAddress = new InetSocketAddress(bindAddress, PORT);
         datagramSocket = new MulticastSocket(socketAddress);
     }
 
@@ -41,7 +44,7 @@ public class UdpService {
 
     @SneakyThrows
     public DatagramPacket receive() {
-        byte[] bytes = new byte[35];
+        byte[] bytes = new byte[BUFF_SIZE];
         DatagramPacket datagramPacket = new DatagramPacket(bytes, bytes.length, socketAddress);
         datagramSocket.receive(datagramPacket);
         return datagramPacket;
